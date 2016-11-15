@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nest_scroll"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.github.colorpickerdemo.MainActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <SeekBara
+            android:id="@+id/sb_color"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:max="360"
+            android:progress="0"/>
+
+        <SeekBar
+            android:id="@+id/sb_sat"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_below="@+id/sb_color"
+            android:max="100"
+            android:progress="0"/>
+
+
+        <SeekBar
+            android:id="@+id/sb_value"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_below="@+id/sb_sat"
+            android:max="100"
+            android:progress="0"/>
+
+        <com.github.colorpickerdemo.view.ColorPicker
+            android:id="@+id/cp"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_below="@+id/sb_value"/>
+
+
+    </RelativeLayout>
+
+
+</android.support.v4.widget.NestedScrollView>
