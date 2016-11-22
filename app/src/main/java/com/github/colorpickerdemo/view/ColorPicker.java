@@ -20,6 +20,7 @@ import com.github.colorpickerdemo.listener.OnSeekColorListener;
 
 /**
  * Created by Administrator on 11/15 0015.
+ * It's very fashion
  */
 public class ColorPicker extends View {
 
@@ -31,11 +32,17 @@ public class ColorPicker extends View {
 
     private Paint colorWheelPaint;
 
+    private Paint touchCirclePaint;
+
     private int radius;
 
     private int centerX;
 
     private int centerY;
+
+    private int touchCircleX;
+
+    private int touchCircleY;
 
     private OnSeekColorListener onSeekColorListener;
 
@@ -57,6 +64,11 @@ public class ColorPicker extends View {
         this.context = context;
         colorWheelPaint = new Paint();
         colorWheelPaint.setAntiAlias(true);
+
+        touchCirclePaint = new Paint();
+        touchCirclePaint.setStyle(Paint.Style.STROKE);
+        touchCirclePaint.setColor(Color.WHITE);
+        touchCirclePaint.setAntiAlias(true);
     }
 
     @Override
@@ -94,8 +106,12 @@ public class ColorPicker extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         canvas.drawCircle(centerX, centerY, radius, colorWheelPaint);
+        canvas.drawCircle(touchCircleX, touchCircleY, 10, touchCirclePaint);
     }
 
+    /**
+     * create color wheel
+     */
     private void createColorWheel() {
         int colorCount = 12;
         int colorAngleStep = 360 / 12;
@@ -132,9 +148,13 @@ public class ColorPicker extends View {
                     colorHSV[0] = (float) (Math.toDegrees(Math.atan2(cy, cx)) + 180f);
                     colorHSV[1] = Math.max(0f, Math.min(1f, (float) (d / radius)));
                     if (onSeekColorListener != null) {
+                        touchCircleY = y;
+                        touchCircleX = x;
                         onSeekColorListener.onSeekColorListener(getColor());
+                        postInvalidate();
                     }
                 }
+
                 break;
             case MotionEvent.ACTION_UP:
                 break;
